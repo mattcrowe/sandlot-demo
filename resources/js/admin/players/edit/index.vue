@@ -1,14 +1,23 @@
 <template>
     <div>
-        <heading>Player Editor<small slot="subtitle">{{ form.name }}</small></heading>
+        <heading>
+            Player Editor
+            <small slot="subtitle">{{ form.name }}</small>
+            <li slot="crumb1"><router-link :to="{name:'players'}">Player Manager</router-link></li>
+        </heading>
         <section class="content">
             <div class="box">
                 <div class="box-body">
                     <form @submit.prevent="form.submit()" @keydown="form.errors.clear($event.target.name)">
-                        <div class="form-group" :class="{ 'has-error': form.error('name') }">
-                            <label for="name">Name *</label>
-                            <input class="form-control" v-model="form.name" placeholder="name">
-                            <span v-for="error in form.error('name')" class="text-danger">{{ error }}</span>
+                        <div class="form-group" :class="{ 'has-error': form.error('first_name') }">
+                            <label for="first_name">First Name *</label>
+                            <input class="form-control" v-model="form.first_name" placeholder="first name">
+                            <span v-for="error in form.error('first_name')" class="text-danger">{{ error }}</span>
+                        </div>
+                        <div class="form-group" :class="{ 'has-error': form.error('last_name') }">
+                            <label for="last_name">Last Name *</label>
+                            <input class="form-control" v-model="form.last_name" placeholder="last name">
+                            <span v-for="error in form.error('last_name')" class="text-danger">{{ error }}</span>
                         </div>
                         <div class="text-right">
                             <button class="btn btn-primary" :disabled="form.errors.any()">

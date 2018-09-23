@@ -17,12 +17,10 @@
         <div id="app">
             <router-view></router-view>
         </div>
-        @yield('main')
-        <!-- /.content -->
+    @yield('main')
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-    @include('layouts.admin.partials.sidebar')
 </div>
 <!-- ./wrapper -->
 

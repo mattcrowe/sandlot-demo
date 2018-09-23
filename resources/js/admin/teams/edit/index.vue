@@ -1,6 +1,10 @@
 <template>
     <div>
-        <heading>Team Editor<small slot="subtitle">{{ form.name }}</small></heading>
+        <heading>
+            Team Editor
+            <small slot="subtitle">{{ form.name }}</small>
+            <li slot="crumb1"><router-link :to="{name:'teams'}">Team Manager</router-link></li>
+        </heading>
         <section class="content">
             <div class="box">
                 <div class="box-body">

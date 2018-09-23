@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="/plugins/admin-lte/index2.html" class="logo">
+    <a href="/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">S<strong>L</strong></span>
         <!-- logo for regular state and mobile devices -->
@@ -23,14 +23,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <p></p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-
-                            </div>
-                            <!-- /.row -->
+                            <i class="fa fa-user fa-5x"></i>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">

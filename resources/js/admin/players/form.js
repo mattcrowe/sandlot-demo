@@ -8,7 +8,8 @@ class Form extends BaseForm {
         this.service = new BaseService({baseUrl: '/api/players/'});
         this.setData({
             id: '',
-            name: '',
+            first_name: '',
+            last_name: '',
         })
     }
 

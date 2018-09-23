@@ -1,6 +1,9 @@
 <template>
     <div>
-        <heading>Team Creator</heading>
+        <heading>
+            Team Creator
+            <li slot="crumb1"><router-link :to="{name:'teams'}">Team Manager</router-link></li>
+        </heading>
         <section class="content">
             <div class="box">
                 <div class="box-body">
