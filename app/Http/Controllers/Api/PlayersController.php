@@ -33,15 +33,17 @@ class PlayersController extends App\Http\Controllers\Controller
         $qb = $this->players->orderBy('last_name');
 
         if ($needle = $request->get('q')) {
-            $qb->where('first_name', 'LIKE', "%$needle%");
-            $qb->orWhere('last_name', 'LIKE', "%$needle%");
+            $qb->where(function ($sub) use ($needle) {
+                $sub->where('first_name', 'LIKE', "%$needle%");
+                $sub->orWhere('last_name', 'LIKE', "%$needle%");
+            });
         }
 
         if ($team_id = $request->get('team_id')) {
             $qb->where('team_id', $team_id);
         }
 
-        return response()->json($qb->paginate());
+        return response()->json($qb->paginate((int) $request->get('perPage', 15)));
     }
 
     /**

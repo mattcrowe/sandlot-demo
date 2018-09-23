@@ -1,14 +1,23 @@
 <template>
     <div>
-        <heading>Team Players</heading>
+        <div v-if="addPlayer">
+            <heading>Add Team Players</heading>
+            <section class="content">
+                <player-input @attach-player="attach"></player-input>
+            </section>
+        </div>
+        <section class="content-header">
+            <h1>Team Players
+                <span class="pull-right">
+                    <button class="btn btn-default" @click.prevent="addPlayer = !addPlayer"><i class="fa fa-plus"></i></button>
+                </span>
+            </h1>
+        </section>
         <section class="content">
             <div class="box">
-                <div class="box-header"></div>
                 <div class="box-body">
 
-
                     <div class="dataTables_wrapper form-inline dt-bootstrap">
-
                         <div class="row">
                             <div class="col-sm-6">
                                 <filter-search :table="table" @filter-search-update="fetch"></filter-search>
@@ -74,6 +83,7 @@
 <script>
     import Form from 'js/admin/players/form';
     import Table from 'js/admin/players/table';
+    import playerInput from 'js/inputs/players.vue';
 
     export default {
         props: ['team'],
@@ -81,6 +91,7 @@
             return {
                 form: new Form(),
                 table: new Table(),
+                addPlayer: false,
             }
         },
         watch: {
@@ -102,6 +113,14 @@
                         //this.table.pushQueryToRouter();
                     });
             }, 300),
+            attach(player) {
+                this.form.setData(player);
+                this.form.team_id = this.team.id;
+                this.form.submit()
+                    .then(() => {
+                        this.fetch();
+                    });
+            },
             detach(player) {
                 this.form.setData(player);
                 this.form.team_id = null;
@@ -110,6 +129,9 @@
                         this.fetch();
                     });
             }
+        },
+        components: {
+            playerInput
         }
     }
 </script>

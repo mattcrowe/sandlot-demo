@@ -12,6 +12,8 @@ class TeamsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('teams')->truncate();
+
         factory(Team::class, 30)->create()->each(function ($team) {
 
         });

@@ -26,9 +26,3 @@ Route::put('teams/{team}', 'Api\TeamsController@update');
 Route::delete('teams/{team}', 'Api\TeamsController@destroy');
 Route::get('teams', 'Api\TeamsController@index');
 Route::post('teams', 'Api\TeamsController@store');
-
-# team_players
-Route::get('teams/{team}/players/{player}', 'Api\TeamPlayersController@show');
-Route::delete('teams/{team}/players/{player}', 'Api\TeamPlayersController@destroy');
-Route::get('teams/{team}/players', 'Api\TeamPlayersController@index');
-Route::post('teams/{team}/players', 'Api\TeamPlayersController@store');

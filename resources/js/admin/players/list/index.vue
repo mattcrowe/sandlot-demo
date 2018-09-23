@@ -3,7 +3,6 @@
         <heading>Players Manager</heading>
         <section class="content">
             <div class="box">
-                <div class="box-header"></div>
                 <div class="box-body">
                     <div class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
