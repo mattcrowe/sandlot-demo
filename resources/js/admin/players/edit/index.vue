@@ -1,10 +1,10 @@
 <template>
     <div>
-        <heading>Team Creator</heading>
+        <heading>Player Editor<small slot="subtitle">{{ form.name }}</small></heading>
         <section class="content">
             <div class="box">
                 <div class="box-body">
-                    <form @submit.prevent="submit()" @keydown="form.errors.clear($event.target.name)">
+                    <form @submit.prevent="form.submit()" @keydown="form.errors.clear($event.target.name)">
                         <div class="form-group" :class="{ 'has-error': form.error('name') }">
                             <label for="name">Name *</label>
                             <input class="form-control" v-model="form.name" placeholder="name">
@@ -25,7 +25,7 @@
 
 <script>
 
-    import Form from 'js/admin/teams/form';
+    import Form from 'js/admin/players/form';
 
     export default {
         data() {
@@ -33,13 +33,9 @@
                 form: new Form(),
             }
         },
-        methods: {
-            submit() {
-                this.form.submit()
-                    .then((team) => {
-                        this.$router.push({name: 'teams.edit', params: {id: team.id}})
-                    });
-            }
-        }
+        mounted() {
+            this.form.show(this.$route.params.id);
+        },
+        methods: {}
     }
 </script>

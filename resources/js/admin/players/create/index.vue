@@ -1,6 +1,6 @@
 <template>
     <div>
-        <heading>Team Creator</heading>
+        <heading>Player Creator</heading>
         <section class="content">
             <div class="box">
                 <div class="box-body">
@@ -25,7 +25,7 @@
 
 <script>
 
-    import Form from 'js/admin/teams/form';
+    import Form from 'js/admin/players/form';
 
     export default {
         data() {
@@ -36,8 +36,8 @@
         methods: {
             submit() {
                 this.form.submit()
-                    .then((team) => {
-                        this.$router.push({name: 'teams.edit', params: {id: team.id}})
+                    .then((player) => {
+                        this.$router.push({name: 'players.edit', params: {id: player.id}})
                     });
             }
         }

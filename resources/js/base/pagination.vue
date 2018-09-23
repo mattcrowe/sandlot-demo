@@ -1,27 +1,32 @@
 <template>
     <div class="row">
         <div class="col-sm-5">
-            <p><div class="dataTables_info" role="status" aria-live="polite">Showing {{ table.from }} to {{ table.to }} of {{ table.total }} entries</div></p>
+            <div role="status" aria-live="polite">
+                Showing {{ table.from }} to {{ table.to }} of {{ table.total }} entries
+            </div>
         </div>
         <div class="col-sm-7">
-            <div class="dataTables_paginate paging_simple_numbers">
+            <span class="pull-right">
                 <ul class="pagination">
-                    <li class="paginate_button" :class="{previous: hasPrevious}">
-                        <a href="#" aria-controls="" data-dt-idx="0" tabindex="0"><i class="fa fa-backward"></i></a>
+                    <li class="paginate_button" :class="{disabled: !isNotFirst}">
+                        <a href="#" @click.prevent="paginate({page: 1})"><i class="fa fa-step-backward"></i></a>
+                    </li>
+                    <li class="paginate_button" :class="{disabled: !hasPrevious}">
+                        <a href="#" @click.prevent="paginate({page: table.current_page - 1})"><i class="fa fa-backward"></i></a>
                     </li>
                     <template v-for="number in indexes">
                         <li class="paginate_button" :class="{ active: isActive(number) }">
                             <a href="#" @click.prevent="paginate({page: number})">{{ number }}</a>
                         </li>
                     </template>
-                    <li class="paginate_button" :class="{next: hasNext}">
-                        <a href="#" aria-controls="" data-dt-idx="7" tabindex="0"><i class="fa fa-forward"></i></a>
+                    <li class="paginate_button" :class="{disabled: !hasNext}">
+                        <a href="#" @click.prevent="paginate({page: table.current_page + 1})"><i class="fa fa-forward"></i></a>
                     </li>
-                    <li class="paginate_button">
-                        <a href="#" aria-controls="" data-dt-idx="7" tabindex="0" :disabled="hasLast"><i class="fa fa-step-forward"></i></a>
+                    <li class="paginate_button" :class="{disabled: !hasLast}">
+                        <a href="#" @click.prevent="paginate({page: table.last_page})"><i class="fa fa-step-forward"></i></a>
                     </li>
                 </ul>
-            </div>
+            </span>
         </div>
     </div>
 </template>
@@ -29,27 +34,6 @@
     export default {
         props: ['table'],
         computed: {
-            showAll() {
-                if (this.table == undefined || this.table.length == 0) {
-                    return false;
-                }
-
-                if (this.table.per_page <= 20 && this.table.total <= this.table.per_page) {
-                    return false;
-                }
-
-                return this.table.total > 0 || this.table.total > this.table.per_page;
-            },
-            showPageLinks() {
-                if (this.table.total <= this.table.per_page) {
-                    return false;
-                }
-
-                return true;
-            },
-            perPage() {
-                return this.table.per_page ? this.table.per_page : 15;
-            },
             isNotFirst() {
                 return this.table.current_page != 1
             },
@@ -65,6 +49,7 @@
             indexes() {
 
                 let max = 5;
+
                 let first = this.table.current_page;
 
                 let values = [];
@@ -95,7 +80,6 @@
 
                 return values;
             },
-
         },
         methods: {
             paginate(query) {

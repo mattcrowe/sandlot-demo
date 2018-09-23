@@ -3,30 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class PlayersController extends App\Http\Controllers\Controller
 {
     /**
-     * @var Player
+     * @var App\Player
      */
     public $players;
 
     /**
-     * ApiController constructor.
-     * @param Player $player
+     * PlayersController constructor.
+     * @param App\Player $player
      */
     public function __construct(App\Player $player)
     {
         $this->players = $player;
-    }
-
-    /**
-     * @param $id
-     */
-    public function get($id)
-    {
-        return $this->players->find($id) ?: $this->abort(404);
     }
 
     /**
@@ -37,13 +30,34 @@ class PlayersController extends App\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
-        //$this->authorize(['view', 'create', 'update', 'delete'], Player::class);
+        $qb = $this->players->orderBy('last_name');
 
-        //$request = Requests\PaginatePlayers::extend($request);
+        if ($needle = $request->get('q')) {
+            $qb->where('first_name', 'LIKE', "%$needle%");
+            $qb->orWhere('last_name', 'LIKE', "%$needle%");
+        }
 
-        //$paginator = $this->paginator($this->players->query(), $request);
+        return response()->json($qb->paginate());
+    }
 
-        return response()->json($this->players->all());
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Requests\StorePlayer $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Requests\StorePlayer $request)
+    {
+        $input = $request->all();
+
+        $player = $this->players->create([
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+        ]);
+
+        $player->save();
+
+        return response()->json($player, 201);
     }
 
     /**
@@ -55,5 +69,37 @@ class PlayersController extends App\Http\Controllers\Controller
     public function show($player)
     {
         return response()->json($player);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Requests\UpdatePlayer $request
+     * @param $player
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Requests\UpdatePlayer $request, $player)
+    {
+        $input = $request->all();
+
+        $this->set($player, $input, [
+            'first_name',
+            'last_name',
+        ]);
+
+        $player->save();
+
+        return response()->json($player);
+    }
+
+    /**
+     * @param $player
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($player)
+    {
+        $player->delete();
+
+        return response()->json(null, 204);
     }
 }

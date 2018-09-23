@@ -9,25 +9,17 @@ use Illuminate\Http\Request;
 class TeamsController extends App\Http\Controllers\Controller
 {
     /**
-     * @var Team
+     * @var App\Team
      */
     public $teams;
 
     /**
-     * ApiController constructor.
-     * @param Team $team
+     * TeamsController constructor.
+     * @param App\Team $team
      */
     public function __construct(App\Team $team)
     {
         $this->teams = $team;
-    }
-
-    /**
-     * @param $id
-     */
-    public function get($id)
-    {
-        return $this->teams->find($id) ?: $this->abort(404);
     }
 
     /**
@@ -38,13 +30,11 @@ class TeamsController extends App\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
-        //$this->authorize(['view', 'create', 'update', 'delete'], Team::class);
+        $qb = $this->teams->orderBy('name');
 
-        //$request = Requests\PaginateTeams::extend($request);
-
-        //$paginator = $this->paginator($this->teams->query(), $request);
-
-        $qb = $this->teams->query();
+        if ($needle = $request->get('q')) {
+            $qb->where('name', 'LIKE', "%$needle%");
+        }
 
         return response()->json($qb->paginate());
     }
@@ -52,8 +42,7 @@ class TeamsController extends App\Http\Controllers\Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Requests\StoreTeam $request
-     *
+     * @param Requests\StoreTeam $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Requests\StoreTeam $request)
@@ -61,9 +50,6 @@ class TeamsController extends App\Http\Controllers\Controller
         $input = $request->all();
 
         $team = $this->teams->create(['name' => $input['name']]);
-
-        $this->set($team, $input, [
-        ]);
 
         $team->save();
 
@@ -84,9 +70,8 @@ class TeamsController extends App\Http\Controllers\Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Requests\UpdateTeam $request
-     * @param  string $id
-     *
+     * @param Requests\UpdateTeam $request
+     * @param $team
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Requests\UpdateTeam $request, $team)
@@ -103,20 +88,11 @@ class TeamsController extends App\Http\Controllers\Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
+     * @param $team
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy($team)
     {
-        $team = $this->get($id);
-
-        $this->authorize('delete', $team);
-
-        $this->itemEvent('deleted', $team);
-
         $team->delete();
 
         return response()->json(null, 204);

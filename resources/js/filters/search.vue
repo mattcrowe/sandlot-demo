@@ -1,7 +1,7 @@
 <template>
     <div class="form-group filter pull-left">
         <label>
-            <slot>Filter <i v-if="table.loading" class="fa fa-spinner fa-spin"></i></slot>
+            <slot></slot>
         </label>
         <div class="form-group">
             <div class="input-group">
@@ -9,7 +9,7 @@
                         class="form-control"
                         v-model="needle"
                         placeholder="filter"
-                        @keydown="filter()"
+                        @keydown="filter"
                 >
                 <div v-if="needle" class="input-group-addon" @click.prevent="clear">
                     <i class="fa fa-times-circle"></i>
