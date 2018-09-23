@@ -1,0 +1,16 @@
+<template>
+    <div>
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="/admin"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <slot></slot>
+            </ol>
+            <h1><slot name="title"></slot><small><slot name="subtitle"></slot></small></h1>
+        </section>
+    </div>
+</template>
+<script>
+    export default {
+
+    }
+</script>
