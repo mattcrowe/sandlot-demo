@@ -5,20 +5,20 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class UpdateTeam
+ * Class AttachTeamPlayer
  * @package App\Http\Requests
  */
-class UpdateTeam extends FormRequest
+class AttachTeamPlayer extends FormRequest
 {
+
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array
      */
     public function rules()
     {
         return [
-            'name' => 'sometimes|required',
+            'player_id' => 'required|exists:players,id',
         ];
     }
+
 }

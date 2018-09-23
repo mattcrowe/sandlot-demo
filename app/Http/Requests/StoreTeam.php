@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class StoreTeam
- * @package Belt\Core\Http\Requests
+ * @package App\Http\Requests
  */
 class StoreTeam extends FormRequest
 {

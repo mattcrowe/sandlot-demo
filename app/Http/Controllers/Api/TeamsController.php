@@ -64,6 +64,8 @@ class TeamsController extends App\Http\Controllers\Controller
      */
     public function show($team)
     {
+        $team->players;
+
         return response()->json($team);
     }
 

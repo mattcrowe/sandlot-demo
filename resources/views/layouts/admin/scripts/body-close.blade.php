@@ -33,4 +33,4 @@
 {{--<!-- AdminLTE for demo purposes -->--}}
 {{--<script src="/plugins/admin-lte/dist/js/demo.js"></script>--}}
 
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/admin.js') }}"></script>

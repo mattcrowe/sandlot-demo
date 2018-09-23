@@ -24,18 +24,12 @@ mix.webpackConfig({
             path.resolve(__dirname, 'resources'),
             'node_modules'
         ],
-        alias: {
-            // 'components': path.resolve(__dirname, './resources/assets/js/front/components'),
-            // 'lib': path.resolve(__dirname, './resources/assets/js/front/lib'),
-            // 'craa': path.resolve(__dirname, './resources/craa-shared/js/front'),
-            // 'craa-shared-admin': path.resolve(__dirname, `./${craaShared}/js/admin`),
-            // 'craa-shared': path.resolve(__dirname, `./${craaShared}/js/front`),
-            // jquery: "jquery/src/jquery"
-        }
+        alias: {}
     }
 });
 
 mix.copy("node_modules/admin-lte", 'public/plugins/admin-lte', false);
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/admin.js', 'public/js').version();
+
+mix.sass('resources/sass/admin.scss', 'public/css').version();

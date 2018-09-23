@@ -29,4 +29,4 @@ const router = new VueRouter({
 router.addRoutes(players);
 router.addRoutes(teams);
 
-const app = new Vue({router}).$mount('#app');
+const admin = new Vue({router}).$mount('#app');

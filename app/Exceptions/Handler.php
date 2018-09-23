@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use Illuminate, Exception;
+use Illuminate, Exception, Symfony;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -65,6 +65,14 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof Illuminate\Validation\ValidationException) {
             return response()->json($exception->errors(), 422);
+        }
+
+        if ($exception instanceof Illuminate\Database\Eloquent\ModelNotFoundException) {
+            return response()->json([], 404);
+        }
+
+        if ($exception instanceof Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            return response()->json([], 404);
         }
 
         return $this->renderJson($exception);

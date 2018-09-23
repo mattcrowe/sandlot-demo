@@ -37,6 +37,10 @@ class PlayersController extends App\Http\Controllers\Controller
             $qb->orWhere('last_name', 'LIKE', "%$needle%");
         }
 
+        if ($team_id = $request->get('team_id')) {
+            $qb->where('team_id', $team_id);
+        }
+
         return response()->json($qb->paginate());
     }
 
@@ -68,6 +72,8 @@ class PlayersController extends App\Http\Controllers\Controller
      */
     public function show($player)
     {
+        $player->team;
+
         return response()->json($player);
     }
 
@@ -83,6 +89,7 @@ class PlayersController extends App\Http\Controllers\Controller
         $input = $request->all();
 
         $this->set($player, $input, [
+            'team_id',
             'first_name',
             'last_name',
         ]);
