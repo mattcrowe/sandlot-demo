@@ -20,8 +20,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // route model binding
-        $router->model('player', App\Player::class);
-        $router->model('team', App\Team::class);
+        $router->model('note', App\Note::class);
     }
 
     /**

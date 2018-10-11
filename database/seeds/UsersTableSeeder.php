@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         # super user
         $user = User::firstOrCreate(
-            ['email' => 'super@sandlot.test'],
+            ['email' => 'super@notepad.test'],
             ['name' => 'SUPER', 'password' => bcrypt('secret')]
         );
         $user->update([

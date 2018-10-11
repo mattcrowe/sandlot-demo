@@ -18,15 +18,13 @@ Vue.component('filter-search', require('js/filters/search.vue'));
 Vue.component('heading', require('js/base/heading.vue'));
 Vue.component('pagination', require('js/base/pagination.vue'));
 
-import players from './admin/players/routes';
-import teams from './admin/teams/routes';
+import notes from './admin/notes/routes';
 
 const router = new VueRouter({
     mode: 'history',
     base: '/admin',
     routes: []
 });
-router.addRoutes(players);
-router.addRoutes(teams);
+router.addRoutes(notes);
 
 const admin = new Vue({router}).$mount('#app');

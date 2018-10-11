@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Class AdminAuthorize
- * @package Belt\Core\Http\Middleware
+ * @package App\Http\Middleware
  */
 class AdminAuthorize
 {

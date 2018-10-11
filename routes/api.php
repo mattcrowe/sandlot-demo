@@ -13,16 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-# players
-Route::get('players/{player}', 'Api\PlayersController@show');
-Route::put('players/{player}', 'Api\PlayersController@update');
-Route::delete('players/{player}', 'Api\PlayersController@destroy');
-Route::get('players', 'Api\PlayersController@index');
-Route::post('players', 'Api\PlayersController@store');
-
-# teams
-Route::get('teams/{team}', 'Api\TeamsController@show');
-Route::put('teams/{team}', 'Api\TeamsController@update');
-Route::delete('teams/{team}', 'Api\TeamsController@destroy');
-Route::get('teams', 'Api\TeamsController@index');
-Route::post('teams', 'Api\TeamsController@store');
+# notes
+Route::get('notes/{note}', 'Api\NotesController@show');
+Route::put('notes/{note}', 'Api\NotesController@update');
+Route::delete('notes/{note}', 'Api\NotesController@destroy');
+Route::get('notes', 'Api\NotesController@index');
+Route::post('notes', 'Api\NotesController@store');

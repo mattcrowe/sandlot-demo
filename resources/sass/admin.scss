@@ -4,3 +4,27 @@
 section.content {
     min-height: 100px;
 }
+
+.notes {
+    .small-box {
+        &:hover {
+            color: #000;
+        }
+        input[type=text] {
+            border: 0;
+            background-color: inherit;
+        }
+        textarea {
+            border: 0;
+            background-color: inherit;
+            width: 100%;
+        }
+        .small-box-footer {
+            .pull-right {
+                i {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

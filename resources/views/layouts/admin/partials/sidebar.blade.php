@@ -5,8 +5,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li><a href="/admin"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="/admin/teams"><i class="fa fa-users"></i> Teams</a></li>
-            <li><a href="/admin/players"><i class="fa fa-user"></i> Players</a></li>
+            <li><a href="/admin/notes"><i class="fa fa-sticky-note-o"></i> Notes</a></li>
         </ul>
     </section>
     <!-- /.sidebar -->
