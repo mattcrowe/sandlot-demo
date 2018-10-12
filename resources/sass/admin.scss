@@ -5,6 +5,10 @@ section.content {
     min-height: 100px;
 }
 
+body {
+    background-color: #ecf0f5;
+}
+
 .notes {
     .small-box {
         &:hover {
@@ -20,10 +24,12 @@ section.content {
             width: 100%;
         }
         .small-box-footer {
-            .pull-right {
-                i {
-                    margin-right: 10px;
-                }
+            i.fa-palette {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+            i.fa-times {
+                margin-right: 5px;
             }
         }
     }

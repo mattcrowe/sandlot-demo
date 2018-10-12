@@ -30,7 +30,7 @@ class NotesController extends App\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
-        $qb = $this->notes->orderBy('title');
+        $qb = $this->notes->orderBy('id', 'desc');
 
         return response()->json($qb->paginate());
     }

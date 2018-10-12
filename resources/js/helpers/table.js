@@ -49,7 +49,6 @@ class BaseTable {
      */
     updateQuery(query) {
         for (let field in query) {
-            //this.query[field] = query[field];
             Vue.set(this.query, field, query[field]);
         }
     }
@@ -82,8 +81,6 @@ class BaseTable {
      */
     pushQueryToHistory() {
         if (this.name) {
-            //History.set(this.table.name, 'table.query.page', 1);
-            //History.set(this.table.name, 'table.query.q', this.table.query.q);
             History.set(this.name, 'table.query', this.query);
         }
     }
@@ -135,15 +132,7 @@ class BaseTable {
                     this.last_page = response.data.last_page;
                     this.from = response.data.from;
                     this.to = response.data.to;
-
-                    if (options.append) {
-                        _.each(response.data.data, item => {
-                            this.items.push(item);
-                        });
-                    } else {
-                        this.items = response.data.data;
-                    }
-
+                    this.items = response.data.data;
                     resolve(response.data);
                 })
                 .catch(error => {

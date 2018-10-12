@@ -14,10 +14,6 @@ window.VueRouter = VueRouter;
 Vue.use(VueRouter);
 Vue.config.devtools = true;
 
-Vue.component('filter-search', require('js/filters/search.vue'));
-Vue.component('heading', require('js/base/heading.vue'));
-Vue.component('pagination', require('js/base/pagination.vue'));
-
 import notes from './admin/notes/routes';
 
 const router = new VueRouter({
