@@ -16,11 +16,12 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         App\Http\Middleware\CheckForMaintenanceMode::class,
+        App\Http\Middleware\EncryptCookies::class,
+        App\Http\Middleware\SetGuidCookie::class,
         Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         App\Http\Middleware\TrimStrings::class,
         Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         App\Http\Middleware\TrustProxies::class,
-        App\Http\Middleware\SetGuidCookie::class,
     ];
 
     /**
@@ -32,11 +33,9 @@ class Kernel extends HttpKernel
 
         'admin' => [
             'web',
-            //App\Http\Middleware\AdminAuthorize::class,
         ],
 
         'web' => [
-            App\Http\Middleware\EncryptCookies::class,
             Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             Illuminate\Session\Middleware\StartSession::class,
             Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -50,7 +49,6 @@ class Kernel extends HttpKernel
             Illuminate\Session\Middleware\StartSession::class,
             Illuminate\Session\Middleware\AuthenticateSession::class,
             App\Http\Middleware\OptionalBasicAuth::class,
-            //App\Http\Middleware\AdminAuthorize::class,
             'throttle:60,1',
             'bindings',
         ],

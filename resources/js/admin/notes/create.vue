@@ -2,14 +2,15 @@
     <div class="small-box" :style="style">
         <div class="small-box-footer clearfix">
             <span class="pull-left">
-                <colors :form="form" @update="update"></colors>
+                <colors :form="form"></colors>
             </span>
             <span class="pull-right">
-                <i class="fas fa-times fa-lg" @click.prevent="destroy"></i>
+                <!--<i class="fas fa-save fa-lg" @click.prevent="submit" disabled></i>-->
+                <button class="btn btn-default btn-xs" :disabled="!form.body" @click.prevent="submit">add</button>
             </span>
         </div>
         <div class="inner">
-            <editable :form="form" column="body" @update="update"></editable>
+            <editable :form="form" column="body"></editable>
         </div>
     </div>
 </template>
@@ -20,7 +21,6 @@
     import editable from 'js/admin/notes/editable.vue';
 
     export default {
-        props: ['note'],
         computed: {
             style() {
                 return 'background-color:#' + this.form.color;
@@ -31,15 +31,13 @@
                 form: new Form(),
             }
         },
-        mounted() {
-            this.form.setData(this.note);
-        },
         methods: {
-            destroy() {
-                this.$emit('destroy-note', this.note);
-            },
-            update() {
-                this.form.submit();
+            submit() {
+                this.form.submit()
+                    .then(() => {
+                        this.form.reset();
+                        this.$emit('created');
+                    });
             },
         },
         components: {

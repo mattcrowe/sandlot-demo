@@ -17,7 +17,6 @@ use App\Http\Middleware\SetGuidCookie;
 $factory->define(App\Note::class, function (Faker $faker) {
     return [
         'color' => array_random(array_keys(config('colors'))),
-        'title' => $faker->words(rand(1, 3), true),
         'body' => $faker->words(rand(5, 25), true),
     ];
 });

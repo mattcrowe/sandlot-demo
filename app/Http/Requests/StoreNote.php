@@ -17,7 +17,7 @@ class StoreNote extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:notes,name',
+            'body' => 'required',
         ];
     }
 

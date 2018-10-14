@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App;
+use App, Cookie;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -32,6 +32,8 @@ class NotesController extends App\Http\Controllers\Controller
     {
         $qb = $this->notes->orderBy('id', 'desc');
 
+        $qb->where('guid', Cookie::get('guid'));
+
         return response()->json($qb->paginate());
     }
 
@@ -47,7 +49,6 @@ class NotesController extends App\Http\Controllers\Controller
 
         $note = $this->notes->create([
             'color' => $input['color'],
-            'title' => $input['title'],
             'body' => $input['body'],
         ]);
 
@@ -64,6 +65,8 @@ class NotesController extends App\Http\Controllers\Controller
      */
     public function show($note)
     {
+        $this->authorize('view', $note);
+
         return response()->json($note);
     }
 
@@ -76,11 +79,12 @@ class NotesController extends App\Http\Controllers\Controller
      */
     public function update(Requests\UpdateNote $request, $note)
     {
+        $this->authorize('update', $note);
+
         $input = $request->all();
 
         $this->set($note, $input, [
             'color',
-            'title',
             'body',
         ]);
 

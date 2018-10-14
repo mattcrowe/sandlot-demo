@@ -17,16 +17,24 @@
                 showSwatch: false,
             }
         },
+        mounted() {
+            if (!this.form.color) {
+                this.form.color = this.defaultColor;
+            }
+        },
         computed: {
             colors() {
                 return _.get(window, 'notepad.colors', {});
-            }
+            },
+            defaultColor() {
+                return Object.keys(this.colors)[0];
+            },
         },
         methods: {
             setColor(hex) {
                 this.showSwatch = false;
                 this.form.color = hex;
-                this.form.submit();
+                this.$emit('update', this.note);
             },
             toggle() {
                 this.showSwatch = !this.showSwatch;

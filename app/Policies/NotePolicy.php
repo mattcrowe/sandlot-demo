@@ -2,17 +2,14 @@
 
 namespace App\Policies;
 
-use Belt;
 use Cookie;
-use App\Note;
 use App\User;
+use App\Note;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
-/**
- * Class NotePolicy
- * @package Belt\Clip\Policies
- */
-class NotePolicy extends \App\Policies\BaseAdminPolicy
+class NotePolicy
 {
+    use HandlesAuthorization;
 
     /**
      * @param Note $note
@@ -24,29 +21,54 @@ class NotePolicy extends \App\Policies\BaseAdminPolicy
     }
 
     /**
-     * Determine whether the user can view the object.
+     * Determine whether the user can view the note.
      *
-     * @param  User $auth
-     * @param  Note $arguments
+     * @param  \App\User  $user
+     * @param  \App\Note  $note
      * @return mixed
      */
-    public function view(User $auth, $arguments = null)
+    public function view(User $user = null, Note $note)
     {
-        if (true === $this->guidMatches($arguments)) {
+        if (true === $this->guidMatches($note)) {
             return true;
         }
     }
 
     /**
-     * Determine whether the user can view the object.
+     * Determine whether the user can create notes.
      *
-     * @param  User $auth
-     * @param  Note $arguments
+     * @param  \App\User  $user
      * @return mixed
      */
-    public function update(User $auth, $arguments = null)
+    public function create(User $user = null)
     {
-        if (true === $this->guidMatches($arguments)) {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can update the note.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Note  $note
+     * @return mixed
+     */
+    public function update(User $user = null, Note $note)
+    {
+        if (true === $this->guidMatches($note)) {
+            return true;
+        }
+    }
+
+    /**
+     * Determine whether the user can delete the note.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Note  $note
+     * @return mixed
+     */
+    public function delete(User $user = null, Note $note)
+    {
+        if (true === $this->guidMatches($note)) {
             return true;
         }
     }

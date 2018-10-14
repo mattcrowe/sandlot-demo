@@ -75,6 +75,10 @@ class Handler extends ExceptionHandler
             return response()->json([], 404);
         }
 
+        if ($exception instanceof Illuminate\Auth\Access\AuthorizationException) {
+            return response()->json([], 403);
+        }
+
         return $this->renderJson($exception);
     }
 
